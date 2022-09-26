@@ -1,0 +1,112 @@
+<section style="margin-left: 500px">
+  <!--for demo wrap-->
+  <h1>Quản Lý Tour</h1>
+  <button (click)="closeDetail()" class="btn btn-primary" style="margin-left: 100px">
+    Đóng Detail
+  </button>
+  <button (click)="displayFormCreate()" style="margin-left: 2px " type="button" class="btn btn-primary">
+    Tạo mới Tour
+  </button>
+  <br>
+  <div id="get_by_brands">
+
+  </div>
+
+
+  <div class="tbl-header">
+    <table>
+      <thead>
+      <tr>
+        <th>STT</th>
+        <th style="padding-left: 30px">Tên</th>
+        <th style="padding-left: 130px">Giá</th>
+        <th style="text-align: center; padding-left: 90px">Hành động</th>
+      </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="list-provinces" class="tbl-content">
+    <table >
+      <tbody>
+      <tr *ngFor="let p of provinces, index as i">
+        <td>{{i + 1}}</td>
+        <td style="padding-left: 30px">{{p.title}}</td>
+        <td style="padding-left: 30px">{{p.price}}</td>
+        <td style="padding-left: 30px">
+          <button class="btn btn-danger" (click)="displayDetail(p.id)">Xem</button>
+          <button style="margin: 1px" class="btn btn-danger" (click)="updateForm(p.id)">Sửa</button>
+          <button class="btn btn-danger" (click)="deleteProvince(p.id)">Xóa</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- The Modal Create And Update -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 id="titleFrom" class="modal-title"></h4>
+        <button type="button" class="btn-close" (click)="closeFromCreate()"></button>
+      </div>
+
+      <!-- Modal body -->
+      <form [formGroup]="provinceForm" enctype="multipart/form-data">
+        <table class="modal-body">
+          <tr>
+            <td>
+              <input id="title" formControlName="title" type="text">
+              Tên
+            </td>
+
+          </tr>
+          <tr>
+            <td>
+              <input id="price" formControlName="price" type="text">
+              Giá
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <textarea id="description" formControlName="description"></textarea>
+              Mô tả
+            </td>
+          </tr>
+          <tr>
+            <td id="messageCreate">
+            </td>
+          </tr>
+        </table>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button (click)="createProvince()" hidden id="buttonCreate" class="btn btn-success">Tạo mới thành phố</button>
+          <button type="reset" hidden id="rest" class="btn btn-danger">Tạo mới thành phố</button>
+          <button (click)="updateProvince()" hidden id="buttonUpdate" class="btn btn-success">Chỉnh sửa thành phố</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- End Modal Create And Update -->
+<!--Detail-->
+<table  *ngIf="idDetail !=null " id="table" style="width: 800px; margin-left: 500px">
+  <thead>
+  <tr>
+    <th scope="col">Tên</th>
+    <th scope="col">Giá</th>
+    <th scope="col">Mô tả</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td >{{titleDetail}}</td>
+  <td>{{priceDetail}}</td>
+  <td>{{descriptionDetail}}</td>
+  </tr>
+  </tbody>
+</table>
+<!--End detail-->
